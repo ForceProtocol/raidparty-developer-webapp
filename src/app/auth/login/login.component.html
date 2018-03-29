@@ -1,0 +1,34 @@
+<div class="body-bg">
+  <div class="form-bg">
+    <div class="wrapper">
+      <div class="logo">
+        <a href="">
+          <img src="assets/images/logo.png">
+        </a>
+      </div>
+      <form [formGroup]="loginForm">
+        <div class="form-heading">
+          <h3>Please login to your account</h3>
+        </div>
+        <div class="custom-form">
+          <div class="form-group">
+            <input type="email" name="" class="form-control" placeholder="email address" formControlName="email">
+          </div>
+          <div class="form-group">
+            <input type="password" name="" class="form-control" placeholder="password" formControlName="password">
+          </div>
+          <div class="button">
+            <a href="#" class="btn btn-info">SIGN IN</a>
+          </div>
+          <div class="forgot-pass">
+            <a routerLink="/forgot-password">Forgot password ?</a>
+          </div>
+          <div class="button">
+            <a routerLink="/signup" class="btn btn-default">SIGN UP</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- body-bg -->

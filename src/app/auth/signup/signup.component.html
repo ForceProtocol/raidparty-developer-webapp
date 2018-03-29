@@ -1,0 +1,37 @@
+<div class="body-bg signup-bg">
+  <div class="form-bg">
+    <div class="wrapper">
+      <div class="logo">
+        <a href="">
+          <img src="assets/images/logo.png">
+        </a>
+      </div>
+      <form [formGroup]="signupForm">
+        <div class="form-heading">
+          <h3>Create your account</h3>
+        </div>
+        <div class="custom-form">
+          <div class="form-group">
+            <input type="email" name="" class="form-control" placeholder="email address" formControlName="email">
+          </div>
+          <div class="form-group">
+            <input type="password" name="" class="form-control" placeholder="password" formControlName="password">
+          </div>
+          <ul class="unstyled centered custom-checkbox">
+            <li>
+              <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" value="value1">
+              <label for="styled-checkbox-1">Agree with the <a href="#">Terms & Privacy</a></label>
+            </li>
+          </ul>
+          <div class="button">
+            <a href="#" class="btn btn-info">SIGN UP</a>
+          </div>
+          <div class="button signup-btn">
+            <a routerLink="/login" class="btn btn-default">SIGN IN</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- body-bg -->
