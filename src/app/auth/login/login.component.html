@@ -1,6 +1,11 @@
 <div class="body-bg">
   <div class="form-bg">
     <div class="wrapper">
+      <p *ngIf="error">
+        <ngb-alert [type]="danger" [dismissible]="true" >
+          <strong>Warning!</strong> {{error.message}}.
+        </ngb-alert>
+      </p>
       <div class="logo">
         <a href="">
           <img src="assets/images/logo.png">
@@ -18,7 +23,7 @@
             <input type="password" name="" class="form-control" placeholder="password" formControlName="password">
           </div>
           <div class="button">
-            <a href="#" class="btn btn-info">SIGN IN</a>
+            <a (click)="login()" class="btn btn-info">SIGN IN</a>
           </div>
           <div class="forgot-pass">
             <a routerLink="/forgot-password">Forgot password ?</a>

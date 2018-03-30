@@ -1,6 +1,11 @@
 <div class="body-bg signup-bg">
   <div class="form-bg">
     <div class="wrapper">
+      <p *ngIf="error">
+        <ngb-alert [type]="danger" [dismissible]="true" >
+          <strong>Warning!</strong> {{error.message}}.
+        </ngb-alert>
+      </p>
       <div class="logo">
         <a href="">
           <img src="assets/images/logo.png">
@@ -24,7 +29,7 @@
             </li>
           </ul>
           <div class="button">
-            <a href="#" class="btn btn-info">SIGN UP</a>
+            <a (click)="signup()" class="btn btn-info">SIGN UP</a>
           </div>
           <div class="button signup-btn">
             <a routerLink="/login" class="btn btn-default">SIGN IN</a>
