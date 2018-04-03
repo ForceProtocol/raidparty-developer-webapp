@@ -17,6 +17,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './home/home.component';
 import { GamesListComponent } from './game/games-list/games-list.component';
 import { AddGameComponent } from './game/add-game/add-game.component';
+import { HeaderComponent } from './headers/header/header.component';
+import { FooterComponent } from './headers/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { AddGameComponent } from './game/add-game/add-game.component';
     ForgotPasswordComponent,
     HomeComponent,
     GamesListComponent,
-    AddGameComponent
+    AddGameComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
