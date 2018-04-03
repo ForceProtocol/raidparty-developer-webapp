@@ -1,0 +1,4 @@
+.btn-invalid {
+  pointer-events: none;
+  cursor: not-allowed;
+}

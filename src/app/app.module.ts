@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,6 +13,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 
+import { ToastrModule } from 'ngx-toastr';
+// import { HomeComponent } from './home/home.component';
+// import { GamesListComponent } from './game/games-list/games-list.component';
+// import { AddGameComponent } from './game/add-game/add-game.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,10 +27,12 @@ import { AuthService } from './services/auth.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     NgbModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot()
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
