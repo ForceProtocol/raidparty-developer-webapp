@@ -14,16 +14,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 
 import { ToastrModule } from 'ngx-toastr';
-// import { HomeComponent } from './home/home.component';
-// import { GamesListComponent } from './game/games-list/games-list.component';
-// import { AddGameComponent } from './game/add-game/add-game.component';
+import { HomeComponent } from './home/home.component';
+import { GamesListComponent } from './game/games-list/games-list.component';
+import { AddGameComponent } from './game/add-game/add-game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    HomeComponent,
+    GamesListComponent,
+    AddGameComponent
   ],
   imports: [
     BrowserModule,

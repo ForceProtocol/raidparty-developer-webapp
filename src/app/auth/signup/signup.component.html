@@ -18,9 +18,15 @@
         <div class="custom-form">
           <div class="form-group">
             <input type="email" name="" class="form-control" placeholder="email address" formControlName="email">
+            <small [hidden]="signupForm.controls.email.valid" class="text-danger">
+              Please enter a valid email
+            </small>
           </div>
           <div class="form-group">
             <input type="password" name="" class="form-control" placeholder="password" formControlName="password">
+            <small [hidden]="signupForm.controls.password.valid" class="text-danger">
+              Password is required
+            </small>
           </div>
           <ul class="unstyled centered custom-checkbox">
             <li>

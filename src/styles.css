@@ -30,7 +30,7 @@
   font-style: normal;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: 'montserratsemibold' !important; 
+  font-family: 'montserratsemibold' !important;
 }
 html {
   height: 100%;
@@ -88,7 +88,7 @@ body .container {
   border-radius: 0;
   text-align: center;
   padding-bottom: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   font-family: 'pt_sansregular';
   font-size: 16px;
 }
@@ -301,7 +301,7 @@ body .container {
   padding: 5px 0 5px 5px;
   background: transparent;
   border: none;
-  -webkit-appearance: none; 
+  -webkit-appearance: none;
 }
 @-moz-document url-prefix(){
   .styled-select select { width: 110%; }
@@ -317,7 +317,7 @@ body .container {
   pointer-events: none;
 }
 .styled-select .glyphicon.glyphicon-triangle-bottom {
-    
+
 }
  select::-ms-expand { display: none; }
 
@@ -455,7 +455,7 @@ section.middle-section {
   display: inline-block;
   top: -65px;
   padding-top: 100px;
-  padding-bottom: 60px;  
+  padding-bottom: 60px;
 }
 /* custom file css */
 .fileinput-new.input-group .btn-file, .fileinput-new .input-group .btn-file {
@@ -469,7 +469,7 @@ span.fileinput-filename {
   position: relative;
   top: 7px;
   font-family: 'pt_sansregular';
-} 
+}
 .fileinput .form-control{
   border: 1px solid #e1e1e1;
   height: 50px;
@@ -598,7 +598,7 @@ span.fileinput-filename {
 }
 .table-bg table tr td {
   font-family: 'pt_sansregular';
-  color: #414141; 
+  color: #414141;
   font-size: 16px;
   padding: 15px 35px;
 }
