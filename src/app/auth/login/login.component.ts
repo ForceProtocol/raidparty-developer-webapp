@@ -35,12 +35,12 @@ export class LoginComponent implements OnInit {
   login() {
     this.auth.login(this.loginForm.value)
       .subscribe((data) => {
-        this.toaster.success('Error', "Logged in successfully", {
+        this.toaster.success('Success', "Logged in successfully", {
           timeOut: 1000,
           positionClass: "toast-top-right",
           toastClass: "toast-class"
         });
-        console.log("Logged in successfully");
+        this.router.navigate(['/home']);
       },
       (error) => {
         this.toaster.error('Error', error.message, {

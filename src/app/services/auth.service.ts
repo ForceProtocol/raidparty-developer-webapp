@@ -21,11 +21,15 @@ export class AuthService implements CanActivate {
   }
 
   signup(params) {
-    return this.http.post(`${environment.API_HOST}/developer/signup`, params)
+    return this.http.post(`${environment.API_HOST}/app/developer`, params)
+      .map((response) => {
+        this.isLoggedIn = true;
+        return response;
+      })
   }
 
   login(params) {
-    return this.http.post(`${environment.API_HOST}/developer/login`, params)
+    return this.http.post(`${environment.API_HOST}/app/developer/login`, params)
       .map((response) => {
         this.isLoggedIn = true;
         return response;
