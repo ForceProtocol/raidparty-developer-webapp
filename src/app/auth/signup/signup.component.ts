@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
           positionClass: "toast-top-right",
           toastClass: "toast-class"
         });
-        this.router.navigate(['/home']);
+        this.router.navigate(['/login']);
       },
       (error) => {
         this.error = error;

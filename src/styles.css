@@ -32,9 +32,6 @@
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: 'montserratsemibold' !important;
 }
-html {
-  height: 100%;
-}
 html body {
   margin: 0;
   padding: 0;
@@ -88,7 +85,6 @@ body .container {
   border-radius: 0;
   text-align: center;
   padding-bottom: 10px;
-  margin-bottom: 10px;
   font-family: 'pt_sansregular';
   font-size: 16px;
 }

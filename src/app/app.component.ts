@@ -9,11 +9,12 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'RaidParty Developer App';
-  isLoggedIn: boolean = false;
 
   constructor(private auth: AuthService) { }
 
-  ngOnInit() {
-    this.isLoggedIn = this.auth.isLoggedIn;
+  ngOnInit() { }
+
+  isLoggedIn() {
+    return this.auth.isLoggedIn;
   }
 }

@@ -22,6 +22,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.auth.isLoggedIn) {
+      this.router.navigate(['/games-list'])
+    }
   }
 
   createForm() {
@@ -40,7 +43,7 @@ export class LoginComponent implements OnInit {
           positionClass: "toast-top-right",
           toastClass: "toast-class"
         });
-        this.router.navigate(['/home']);
+        this.router.navigate(['/games-list']);
       },
       (error) => {
         this.toaster.error('Error', error.message, {

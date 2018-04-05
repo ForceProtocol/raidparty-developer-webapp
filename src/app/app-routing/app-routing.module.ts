@@ -15,9 +15,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-password', component: HomeComponent },
-  { path: 'home', component: HomeComponent, /*canActivate: [AuthService]*/ },
-  { path: 'games-list', component: GamesListComponent, /*canActivate: [AuthService]*/ },
-  { path: 'add-game', component: AddGameComponent, /*canActivate: [AuthService]*/ }
+  { path: 'home', component: HomeComponent, canActivate: [AuthService] },
+  { path: 'games-list', component: GamesListComponent, canActivate: [AuthService] },
+  { path: 'add-game', component: AddGameComponent, canActivate: [AuthService] }
 ];
 
 @NgModule({

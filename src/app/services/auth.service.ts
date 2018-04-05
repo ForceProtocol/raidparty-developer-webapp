@@ -9,21 +9,31 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class AuthService implements CanActivate {
   isLoggedIn = false;
+  developer: any;
+  private token: any;
 
   constructor(private http: HttpClient,
-              private router: Router) { }
+              private router: Router) {
+    let dev = localStorage.getItem("developer");
+    if(dev) {
+      this.developer = JSON.parse(dev);
+      this.token = localStorage.getItem("token");
+      this.isLoggedIn = true;
+    }
+  }
 
   canActivate() {
     if (!this.isLoggedIn) {
       this.router.navigate(["/login"]);
       return false;
+    } else {
+      return true;
     }
   }
 
   signup(params) {
     return this.http.post(`${environment.API_HOST}/app/developer`, params)
       .map((response) => {
-        this.isLoggedIn = true;
         return response;
       })
   }
@@ -32,11 +42,23 @@ export class AuthService implements CanActivate {
     return this.http.post(`${environment.API_HOST}/app/developer/login`, params)
       .map((response) => {
         this.isLoggedIn = true;
+        this.setLocalStorage(response);
         return response;
       })
   }
 
   resetPassword(params) {
-    return this.http.post(`${environment.API_HOST}/developer/reset-password`, params)
+    return this.http.post(`${environment.API_HOST}/app/developer/reset-password`, params)
+  }
+
+  changePassword(params) {
+    return this.http.post(`${environment.API_HOST}/app/developer/change-password`, params)
+  }
+
+  private setLocalStorage(response) {
+    this.developer = response.developer;
+    this.token = response.token;
+    localStorage.setItem("developer", JSON.stringify(response.developer));
+    localStorage.setItem("token", response.token);
   }
 }
