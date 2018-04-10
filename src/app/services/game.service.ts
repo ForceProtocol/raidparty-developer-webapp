@@ -72,4 +72,13 @@ export class GameService {
         return error
       });
   }
+
+  getBalance() {
+    return this.http.get(`${environment.API_HOST}/app/developer/balance?token=${this.auth.getToken()}`)
+      .map((response: any) => {
+        return response.totalForce;
+      }, (error) => {
+        return error
+      });
+  }
 }
