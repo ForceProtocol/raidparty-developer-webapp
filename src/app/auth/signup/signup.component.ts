@@ -37,15 +37,17 @@ export class SignupComponent implements OnInit {
   signup() {
     this.auth.signup(this.signupForm.value)
       .subscribe((data) => {
-        this.toaster.success('Success', "Signed up in successfully", {
-          timeOut: 1000,
-          positionClass: "toast-top-right",
-          toastClass: "toast-class"
+        this.toaster.success('Success', "Signed up successfully", {
+          timeOut: 3000,
+          positionClass: "toast-top-right"
         });
         this.router.navigate(['/login']);
       },
       (error) => {
-        this.error = error;
+        this.toaster.error('Error', "You are not signed up please try again", {
+          timeOut: 3000,
+          positionClass: "toast-bottom-center"
+        });
       })
   }
 

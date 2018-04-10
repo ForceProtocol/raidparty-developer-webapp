@@ -691,6 +691,11 @@ footer {
   font-family: 'pt_sansregular';
 }
 
+.btn-invalid {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 /* Delete modal css */
   .custom-modal .modal-header {
     border-bottom: 0;

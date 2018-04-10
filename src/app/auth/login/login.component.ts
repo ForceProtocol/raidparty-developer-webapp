@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (this.auth.isLoggedIn) {
-      this.router.navigate(['/games-list'])
+      this.router.navigate(['/games/list'])
     }
   }
 
@@ -40,10 +40,9 @@ export class LoginComponent implements OnInit {
       .subscribe((data) => {
         this.toaster.success('Success', "Logged in successfully", {
           timeOut: 1000,
-          positionClass: "toast-top-right",
-          toastClass: "toast-class"
+          positionClass: "toast-top-right"
         });
-        this.router.navigate(['/games-list']);
+        this.router.navigate(['/games/list']);
       },
       (error) => {
         this.toaster.error('Error', error.message, {

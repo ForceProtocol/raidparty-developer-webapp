@@ -6,7 +6,7 @@
       </div>
       <h2 class="col-md-4 col-sm-4 col-xs-4">Your games</h2>
       <div class="buttons back-btn pull-right text-right col-md-4 col-sm-4 col-xs-4">
-        <a routerLink="/add-game" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> ADD GAME</a>
+        <a routerLink="/games/add" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> ADD GAME</a>
       </div>
     </div>
     <div class="main-heading row btn-mob">
@@ -15,7 +15,7 @@
         <a href="#" class="btn btn-default">BACK</a>
       </div>
       <div class="buttons back-btn pull-right text-right col-md-6 col-sm-6 col-xs-6">
-        <a routerLink="/add-game" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>  ADD GAME</a>
+        <a routerLink="/games/add" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>  ADD GAME</a>
       </div>
     </div>
 
@@ -32,52 +32,29 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>MegaMan</td>
-              <td>2 456</td>
-              <td>15 000</td>
-              <td>234</td>
-              <td><a href="#"><b>more</b></a></td>
-            </tr>
-            <tr>
-              <td>ARMA 3</td>
-              <td>2 456</td>
-              <td>15 000</td>
-              <td>234</td>
-              <td class="tooltip-hover">
-                <div class="more-app"><a href="#"><b>less</b></a>
-                <div class="tooltip-box">
-                  <div class="arrow_box">
-                    <ul>
-                      <li><a href="#">Edit Game</a></li>
-                      <li><a href="#">View SDK Keys</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#deletemodal">Delete</a></li>
-                    </ul>
+            <tr *ngFor="let game of games">
+              <td>{{game.title}}</td>
+              <td>{{game.description}}</td>
+              <td>{{game.link}}</td>
+              <td>{{game.platform}}</td>
+              <td class="tooltip-hover" *ngIf="game">
+                <div type="button" class="btn btn-outline-primary" (click)="game.isCollapsed = !game.isCollapsed"
+                        [attr.aria-expanded]="!game.isCollapsed" aria-controls="collapseExample">
+                  <a><b [hidden]="!game.isCollapsed">More</b></a>
+                  <a><b [hidden]="game.isCollapsed">less</b></a>
+                </div>
+                <div id="collapseExample" [ngbCollapse]="game.isCollapsed">
+                  <div class="card">
+                    <div class="card-body">
+                      <ul>
+                        <li><a routerLink="/games/{{game.gameId}}/edit">Edit Game</a></li>
+                        <li><a href="#">View SDK Keys</a></li>
+                        <li><a (click)="delete(game.gameId, game.title)">Delete</a></li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-                </div>
               </td>
-            </tr>
-            <tr>
-              <td>Ferma 4</td>
-              <td>2 456</td>
-              <td>15 000</td>
-              <td>234</td>
-              <td><a href="#"><b>more</b></a></td>
-            </tr>
-            <tr>
-              <td>Crysis</td>
-              <td>2 456</td>
-              <td>15 000</td>
-              <td>234</td>
-              <td><a href="#"><b>more</b></a></td>
-            </tr>
-            <tr>
-              <td>Fallout</td>
-              <td>2 456</td>
-              <td>15 000</td>
-              <td>234</td>
-              <td><a href="#"><b>more</b></a></td>
             </tr>
           </tbody>
         </table>

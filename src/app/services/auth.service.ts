@@ -55,10 +55,15 @@ export class AuthService implements CanActivate {
     return this.http.post(`${environment.API_HOST}/app/developer/change-password`, params)
   }
 
+  getToken() {
+    return this.token;
+  }
+
   private setLocalStorage(response) {
     this.developer = response.developer;
     this.token = response.token;
     localStorage.setItem("developer", JSON.stringify(response.developer));
     localStorage.setItem("token", response.token);
   }
+
 }

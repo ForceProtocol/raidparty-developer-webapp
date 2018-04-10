@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -13,7 +15,9 @@ export class ForgotPasswordComponent implements OnInit {
   error: string;
 
   constructor(private fb: FormBuilder,
-              private auth: AuthService) {
+              private auth: AuthService,
+              private router: Router,
+              private toaster: ToastrService) {
     this.createForm();
   }
 
@@ -30,7 +34,11 @@ export class ForgotPasswordComponent implements OnInit {
   resetPassword() {
     this.auth.resetPassword(this.forgotPasswordForm.value)
       .subscribe((data) => {
-        console.log("Reset Password link has been sent successfully")
+        this.toaster.success('Success', "Your reset password request has been sent successfully", {
+          timeOut: 3000,
+          positionClass: "toast-top-right"
+        });
+        this.router.navigate(['/login']);
       },
       (error) => {
         this.error = error;

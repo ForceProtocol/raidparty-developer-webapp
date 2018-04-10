@@ -11,38 +11,49 @@
         <form [formGroup]="addGameForm">
           <div class="form-group">
             <label>Game title</label>
-            <input type="text" class="form-control" placeholder="Game title">
+            <input type="text" class="form-control" placeholder="Game title" formControlName="title">
+            <small [hidden]="addGameForm.controls.title.valid" class="text-danger">
+              Title is required
+            </small>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" class="form-control" placeholder="Description" formControlName="description">
+            <small [hidden]="addGameForm.controls.description.valid" class="text-danger">
+              Description is required
+            </small>
           </div>
           <div class="form-group">
             <label>Platform</label>
-            <input type="text" class="form-control" placeholder="IOS Android PC Playstation Xbox">
+            <input type="text" class="form-control" placeholder="IOS Android PC Playstation Xbox" formControlName="platform">
+            <small [hidden]="addGameForm.controls.platform.valid" class="text-danger">
+              Platform is required
+            </small>
           </div>
           <div class="form-group">
             <label>Game download link</label>
-            <input type="text" class="form-control" placeholder="App Stor or Play Market">
+            <input type="text" class="form-control" placeholder="App Stor or Play Market" formControlName="link">
+            <small [hidden]="addGameForm.controls.link.valid" class="text-danger">
+              Link is required
+            </small>
           </div>
-          <div class="form-group">
-            <label>Upload Image</label>
-            <div class="fileinput fileinput-new input-group col-md-10 col-sm-10 col-xs-10" data-provides="fileinput">
-              <div class="form-control file-form" data-trigger="fileinput">
-                <span class="fileinput-filename"></span>
+          <div class="form-group" [hidden]="gameId">
+            <div class="input-group-addon">
+              <input class="btn btn-default btn-file" type="file" name="user_image" accept="image/*" (change)="upload($event)">
+
+              <div class="browse-image col-md-2 col-sm-2 col-xs-2">
+                <img src="{{imageUrl}}">
               </div>
-              <span class="input-group-addon btn btn-default btn-file">
-                <span class="fileinput-new">UPLOAD</span>
-                <span class="fileinput-exists">Change</span>
-                <input type="file" name="...">
-              </span>
-              <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-            </div>
-            <div class="browse-image col-md-2 col-sm-2 col-xs-2">
-              <img src="assets/images/image.png">
             </div>
           </div>
           <div class="buttons pull-left">
             <a href="#" class="btn btn-default">BACK</a>
           </div>
-          <div class="buttons pull-right">
-            <a href="#" class="btn btn-info">ADD GAME</a>
+          <div class="buttons pull-right" [ngClass]="{'btn-invalid' : addGameForm.invalid}" [hidden]="gameId">
+            <a (click)="create()" class="btn btn-info">ADD GAME</a>
+          </div>
+          <div class="buttons pull-right" [ngClass]="{'btn-invalid' : addGameForm.invalid}" [hidden]="!gameId">
+            <a (click)="update()" class="btn btn-info">UPDATE GAME</a>
           </div>
         </form>
       </div>

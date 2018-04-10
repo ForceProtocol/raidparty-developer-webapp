@@ -11,14 +11,19 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
 import { AuthService } from './services/auth.service';
+import { GameService } from './services/game.service';
 
 import { ToastrModule } from 'ngx-toastr';
+
+
 import { HomeComponent } from './home/home.component';
 import { GamesListComponent } from './game/games-list/games-list.component';
 import { AddGameComponent } from './game/add-game/add-game.component';
 import { HeaderComponent } from './headers/header/header.component';
 import { FooterComponent } from './headers/footer/footer.component';
+import { NoGamesComponent } from './game/no-games/no-games.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,8 @@ import { FooterComponent } from './headers/footer/footer.component';
     GamesListComponent,
     AddGameComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    NoGamesComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +47,7 @@ import { FooterComponent } from './headers/footer/footer.component';
     HttpClientModule,
     ToastrModule.forRoot()
   ],
-  providers: [AuthService],
+  providers: [AuthService, GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
