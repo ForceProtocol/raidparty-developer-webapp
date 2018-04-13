@@ -12,12 +12,19 @@ import { Router } from '@angular/router'
 })
 export class AppComponent implements OnInit {
 
+  showDiv: boolean = false;
+
   constructor(private auth: AuthService,
               private router: Router,
               private title: Title) {
     this.router.events.subscribe((event)=>{
       let urlParts = router.url.split("/")
       this.title.setTitle(urlParts[urlParts.length - 1]);
+      if (urlParts[urlParts.length - 1] == "list") {
+        this.showDiv = false;
+      } else {
+        this.showDiv = true;
+      }
     });
   }
 
