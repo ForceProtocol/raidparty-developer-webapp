@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit {
       (error) => {
         this.toaster.error('Error', "You are not signed up please try again", {
           timeOut: 3000,
-          positionClass: "toast-bottom-center"
+          positionClass: "toast-top-center"
         });
       })
   }

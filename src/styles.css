@@ -689,6 +689,11 @@ footer {
   padding-top: 35px;
   padding-bottom: 20px;
   font-family: 'pt_sansregular';
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 9999;
 }
 
 .btn-invalid {
@@ -909,4 +914,19 @@ footer {
     padding-left: 0;
     padding-right: 0;
   }
+}
+
+
+.site {
+  display: flex;
+  min-height: 77vh;
+}
+
+.site-content {
+  flex: 1 0 auto;
+}
+
+.app-root {
+  display: inline-block;
+  width: 100%;
 }

@@ -64,7 +64,7 @@ export class AddGameComponent implements OnInit {
       (error) => {
         this.toaster.error('Error', "Your game is not created", {
           timeOut: 3000,
-          positionClass: "toast-bottom-center"
+          positionClass: "toast-top-center"
         });
       })
   }
@@ -81,7 +81,7 @@ export class AddGameComponent implements OnInit {
       (error) => {
         this.toaster.error('Error', "Your game is not updated", {
           timeOut: 3000,
-          positionClass: "toast-bottom-center"
+          positionClass: "toast-top-center"
         });
       })
   }

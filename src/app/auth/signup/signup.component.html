@@ -14,13 +14,13 @@
           <div class="row">
             <div class="form-group col-sm-6">
               <input type="text" name="" class="form-control" placeholder="First Name" formControlName="firstName">
-              <small [hidden]="signupForm.controls.firstName.valid" class="text-danger">
+              <small [hidden]="signupForm.controls.firstName.valid || signupForm.controls.firstName.pristine" class="text-danger">
                 First Name is required
               </small>
             </div>
             <div class="form-group col-sm-6">
               <input type="text" name="" class="form-control" placeholder="Last Name" formControlName="lastName">
-              <small [hidden]="signupForm.controls.lastName.valid" class="text-danger">
+              <small [hidden]="signupForm.controls.lastName.valid || signupForm.controls.lastName.pristine" class="text-danger">
                 Last Name is required
               </small>
             </div>
@@ -28,13 +28,13 @@
           <div class="row">
             <div class="form-group col-sm-6">
               <input type="email" name="" class="form-control" placeholder="email address" formControlName="email">
-              <small [hidden]="signupForm.controls.email.valid" class="text-danger">
+              <small [hidden]="signupForm.controls.email.valid || signupForm.controls.email.pristine" class="text-danger">
                 Please enter a valid email
               </small>
             </div>
             <div class="form-group col-sm-6">
               <input type="password" name="" class="form-control" placeholder="password" formControlName="password">
-              <small [hidden]="signupForm.controls.password.valid" class="text-danger">
+              <small [hidden]="signupForm.controls.password.valid || signupForm.controls.password.pristine" class="text-danger">
                 Password is required
               </small>
             </div>

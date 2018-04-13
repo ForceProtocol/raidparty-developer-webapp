@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       (error) => {
         this.toaster.error('Error', error.message, {
           timeOut: 3000,
-          positionClass: 'toast-bottom-center'
+          positionClass: 'toast-top-center'
         });
       });
   }

@@ -13,13 +13,13 @@
         <div class="custom-form">
           <div class="form-group">
             <input type="email" name="" class="form-control" placeholder="email address" formControlName="email">
-            <small [hidden]="loginForm.controls.email.valid" class="text-danger">
+            <small [hidden]="loginForm.controls.email.valid || loginForm.controls.email.pristine" class="text-danger">
               Please enter a valid email
             </small>
           </div>
           <div class="form-group">
             <input type="password" name="" class="form-control" placeholder="password" formControlName="password">
-            <small [hidden]="loginForm.controls.password.valid" class="text-danger">
+            <small [hidden]="loginForm.controls.password.valid || loginForm.controls.password.pristine" class="text-danger">
               Password is required
             </small>
           </div>

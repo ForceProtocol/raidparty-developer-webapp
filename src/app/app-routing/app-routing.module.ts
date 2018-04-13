@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'games/list', component: GamesListComponent, canActivate: [AuthService] },
   { path: 'games/add', component: AddGameComponent, canActivate: [AuthService] },
   { path: 'games/:gameId/edit', component: AddGameComponent, canActivate: [AuthService] },
-  { path: 'games/empty', component: NoGamesComponent, canActivate: [AuthService] }
+  { path: 'games/empty', component: NoGamesComponent, canActivate: [AuthService] },
+  { path: '**', component: LoginComponent }
 ];
 
 @NgModule({
