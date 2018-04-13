@@ -33,7 +33,7 @@ export class GamesListComponent implements OnInit {
       (error) => {
         this.toaster.error('Error', error.message, {
           timeOut: 3000,
-          positionClass: 'toast-bottom-center'
+          positionClass: 'toast-top-center'
         });
       })
   }
@@ -51,7 +51,7 @@ export class GamesListComponent implements OnInit {
       (error) => {
         this.toaster.error('Error', error.message, {
           timeOut: 3000,
-          positionClass: 'toast-bottom-center'
+          positionClass: 'toast-top-center'
         });
       })
   }

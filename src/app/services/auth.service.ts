@@ -51,8 +51,18 @@ export class AuthService implements CanActivate {
     return this.http.post(`${environment.API_HOST}/app/developer/reset-password`, params)
   }
 
-  changePassword(params) {
-    return this.http.post(`${environment.API_HOST}/app/developer/change-password`, params)
+  changePassword(params, developerId, pin) {
+    return this.http.post(`${environment.API_HOST}/app/developer/change-password?developer=${developerId}&pin=${pin}`, params)
+      .map((response: any) => {
+        return response;
+      })
+  }
+
+  activateDevloper(developerId, pin) {
+    return this.http.get(`${environment.API_HOST}/app/developer/activate?developer=${developerId}&pin=${pin}`)
+      .map((response: any) => {
+        return response;
+      })
   }
 
   getToken() {

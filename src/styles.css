@@ -32,6 +32,9 @@
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: 'montserratsemibold' !important;
 }
+html {
+  height: 100%;
+}
 html body {
   margin: 0;
   padding: 0;
@@ -40,18 +43,16 @@ html body {
   color: #6a6a6a;
   background: #fcfcfc;
 }
+
 body .container {
   max-width: 1140px;
 }
 .body-bg {
   background: url("/assets/images/body-bg.png");
-  height: 100%;
+  height: 810px;
   background-size: cover;
   background-repeat: no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-position: 0;
+  background-position: center;
 }
 .body-bg.signup-bg {
   background: url("/assets/images/bg-signup.png");
@@ -60,11 +61,13 @@ body .container {
 }
 .body-bg .form-bg {
   background: url("/assets/images/form-bg.png");
-  background-size: 100% 100%;
+  background-size: 85% 90%;
   background-repeat: no-repeat;
   width: 800px;
-  height: 700px;
+  height: 730px;
   max-width: 100%;
+  margin: 0 auto;
+  background-position: center;
 }
 .wrapper {
   width: 40%;
@@ -425,9 +428,9 @@ section.middle-section {
 .button.add-btn {
   width: 30%;
   text-align: center;
-  margin: 0 auto;
   position: relative;
-  top: -170px;
+  margin-top: 5%;
+  top: 5%;
 }
 .button.add-btn a.btn.btn-default {
   width: 100%;
@@ -689,6 +692,10 @@ footer {
   padding-top: 35px;
   padding-bottom: 20px;
   font-family: 'pt_sansregular';
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 9999;
 }
 
 .btn-invalid {
@@ -909,4 +916,17 @@ footer {
     padding-left: 0;
     padding-right: 0;
   }
+}
+
+
+.site {
+  display: flex;
+  min-height: 77vh;
+}
+
+.site-content {
+  flex: 1 0 auto;
+}
+.app-root {
+  width: 100%;
 }
