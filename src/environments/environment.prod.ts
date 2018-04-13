@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_HOST: 'http://localhost:1337'
+  API_HOST: 'https://hub.raidparty.io'
 };
