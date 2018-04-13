@@ -58,6 +58,13 @@ export class AuthService implements CanActivate {
       })
   }
 
+  activateDevloper(developerId, pin) {
+    return this.http.get(`${environment.API_HOST}/app/developer/activate?developer=${developerId}&pin=${pin}`)
+      .map((response: any) => {
+        return response;
+      })
+  }
+
   getToken() {
     return this.token;
   }

@@ -6,7 +6,7 @@
           <img src="assets/images/logo.png">
         </a>
       </div>
-      <form [formGroup]="loginForm">
+      <form [formGroup]="loginForm" *ngIf="!isOnActivate; else activate">
         <div class="form-heading">
           <h3>Please login to your account</h3>
         </div>
@@ -34,6 +34,12 @@
           </div>
         </div>
       </form>
+
+      <ng-template #activate>
+        <div class="button">
+          <a (click)="activateDevloper()" class="btn btn-default">Activate</a>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

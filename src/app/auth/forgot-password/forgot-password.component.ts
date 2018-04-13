@@ -32,9 +32,9 @@ export class ForgotPasswordComponent implements OnInit {
 
   createForm() {
 
-    if (this.activatedRoute.snapshot.queryParams.developerId) {
+    if (this.activatedRoute.snapshot.queryParams.developer) {
       this.isForgetPassword = false;
-      this.developerId = this.activatedRoute.snapshot.queryParams.developerId;
+      this.developerId = this.activatedRoute.snapshot.queryParams.developer;
       this.pin = this.activatedRoute.snapshot.queryParams.pin;
       this.changePasswordForm = this.fb.group({
         password: ['', Validators.required]
