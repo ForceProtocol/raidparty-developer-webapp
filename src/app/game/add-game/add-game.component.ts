@@ -61,8 +61,8 @@ export class AddGameComponent implements OnInit {
         });
         this.router.navigate(['/games/list']);
       },
-      (error) => {
-        this.toaster.error('Error', "Your game is not created", {
+      (errorObj) => {
+        this.toaster.error('Error', errorObj.error.err, {
           timeOut: 3000,
           positionClass: "toast-top-center"
         });
@@ -78,8 +78,8 @@ export class AddGameComponent implements OnInit {
         });
         this.router.navigate(['/games/list']);
       },
-      (error) => {
-        this.toaster.error('Error', "Your game is not updated", {
+      (errorObj) => {
+        this.toaster.error('Error', errorObj.error.err, {
           timeOut: 3000,
           positionClass: "toast-top-center"
         });
