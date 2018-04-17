@@ -10,6 +10,8 @@ import { AuthService } from '../services/auth.service';
 import { GamesListComponent } from '../game/games-list/games-list.component';
 import { AddGameComponent } from '../game/add-game/add-game.component';
 import { NoGamesComponent } from '../game/no-games/no-games.component';
+import { PlayersComponent } from '../players/players.component';
+import { RewardsComponent } from '../rewards/rewards.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: 'games/add', component: AddGameComponent, canActivate: [AuthService] },
   { path: 'games/:gameId/edit', component: AddGameComponent, canActivate: [AuthService] },
   { path: 'games/empty', component: NoGamesComponent, canActivate: [AuthService] },
+  { path: 'players', component: PlayersComponent, canActivate: [AuthService] },
+  { path: 'rewards', component: RewardsComponent, canActivate: [AuthService] },
   { path: '**', component: LoginComponent }
 ];
 

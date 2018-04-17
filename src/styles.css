@@ -933,3 +933,8 @@ footer {
 .form-bg {
   display: flex;
 }
+
+.feature-on-the-way {
+  margin-bottom: 52%;
+  margin-top: 30%;
+}
