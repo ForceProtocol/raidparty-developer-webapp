@@ -12,8 +12,6 @@ import { Router, ActivatedRoute } from '@angular/router'
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  error: string;
-  isOnActivate: boolean = false;
   developerId: string;
   pin: string;
 
@@ -25,10 +23,9 @@ export class LoginComponent implements OnInit {
     let params = this.activatedRoute.snapshot.queryParams;
     if (params.developer) {
       this.developerId = params.developer;
-      this.pin = params.pin
-      this.isOnActivate = true;
+      this.pin = params.pin;
+      this.activateDevloper();
     } else {
-      this.isOnActivate = false;
       this.createForm();
     }
   }
