@@ -59,7 +59,7 @@ export class AddGameComponent implements OnInit {
           timeOut: 3000,
           positionClass: "toast-top-right"
         });
-        this.router.navigate(['/games/list']);
+        this.router.navigate(['/game/added']);
       },
       (errorObj) => {
         this.toaster.error('Error', errorObj.error.err, {

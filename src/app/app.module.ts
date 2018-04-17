@@ -19,7 +19,7 @@ import { AppInterceptor } from './services/app.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 
 
-import { HomeComponent } from './home/home.component';
+import { GameAddedComponent } from './game/game-added/game-added.component';
 import { GamesListComponent } from './game/games-list/games-list.component';
 import { AddGameComponent } from './game/add-game/add-game.component';
 import { HeaderComponent } from './headers/header/header.component';
@@ -32,7 +32,7 @@ import { NoGamesComponent } from './game/no-games/no-games.component';
     LoginComponent,
     SignupComponent,
     ForgotPasswordComponent,
-    HomeComponent,
+    GameAddedComponent,
     GamesListComponent,
     AddGameComponent,
     HeaderComponent,
