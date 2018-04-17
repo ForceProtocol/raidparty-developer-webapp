@@ -605,7 +605,6 @@ span.fileinput-filename {
   font-size: 14px;
   position: relative;
   text-transform: uppercase;
-  z-index: 9999;
 }
 /* tooltip css */
 .arrow_box {

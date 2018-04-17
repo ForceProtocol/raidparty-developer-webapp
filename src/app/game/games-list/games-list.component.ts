@@ -11,6 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 export class GamesListComponent implements OnInit {
   games: any = [];
   isCollapsed: boolean = true;
+  display='none';
+  selectedGame: any = {};
 
 
   constructor(private gameService: GameService,
@@ -56,4 +58,12 @@ export class GamesListComponent implements OnInit {
       })
   }*/
 
+  openModal(game) {
+    this.display='block';
+    this.selectedGame = game;
+  }
+
+  onCloseHandled() {
+    this.display='none';
+  }
 }
