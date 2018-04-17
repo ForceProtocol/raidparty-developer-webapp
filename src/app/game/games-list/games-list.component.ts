@@ -30,8 +30,8 @@ export class GamesListComponent implements OnInit {
           this.router.navigate(['/games/empty'])
         }
       },
-      (error) => {
-        this.toaster.error('Error', error.message, {
+      (errorObj) => {
+        this.toaster.error('Error', errorObj.error.err, {
           timeOut: 3000,
           positionClass: 'toast-top-center'
         });
@@ -48,8 +48,8 @@ export class GamesListComponent implements OnInit {
           positionClass: 'toast-top-right'
         });
       },
-      (error) => {
-        this.toaster.error('Error', error.message, {
+      (errorObj) => {
+        this.toaster.error('Error', errorObj.error.err, {
           timeOut: 3000,
           positionClass: 'toast-top-center'
         });

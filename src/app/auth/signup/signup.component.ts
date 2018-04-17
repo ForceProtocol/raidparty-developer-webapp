@@ -43,8 +43,8 @@ export class SignupComponent implements OnInit {
         });
         this.router.navigate(['/login']);
       },
-      (error) => {
-        this.toaster.error('Error', "You are not signed up please try again", {
+      (errorObj) => {
+        this.toaster.error('Error', errorObj.error.err, {
           timeOut: 3000,
           positionClass: "toast-top-center"
         });

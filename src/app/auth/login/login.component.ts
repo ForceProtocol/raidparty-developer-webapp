@@ -56,8 +56,8 @@ export class LoginComponent implements OnInit {
         });
         this.router.navigate(['/games/list']);
       },
-      (error) => {
-        this.toaster.error('Error', error.message, {
+      (errorObj) => {
+        this.toaster.error('Error', errorObj.error.err, {
           timeOut: 3000,
           positionClass: 'toast-top-center'
         });
@@ -73,8 +73,8 @@ export class LoginComponent implements OnInit {
         });
         this.router.navigate(['/login']);
       },
-      (error) => {
-        this.toaster.error('Error', error.message, {
+      (errorObj) => {
+        this.toaster.error('Error', errorObj.error.err, {
           timeOut: 3000,
           positionClass: 'toast-top-center'
         });

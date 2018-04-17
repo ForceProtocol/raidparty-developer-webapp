@@ -32,9 +32,7 @@
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: 'montserratsemibold' !important;
 }
-html {
-  height: 100%;
-}
+
 html body {
   margin: 0;
   padding: 0;
@@ -53,6 +51,7 @@ body .container {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  display: flex;
 }
 .body-bg.signup-bg {
   background: url("/assets/images/bg-signup.png");
@@ -68,6 +67,7 @@ body .container {
   max-width: 100%;
   margin: 0 auto;
   background-position: center;
+  margin-top: 80px;
 }
 .wrapper {
   width: 40%;
@@ -451,7 +451,6 @@ section.middle-section {
   margin-bottom: 8px;
   z-index: 8;
   width: 100%;
-  display: inline-block;
   top: -65px;
   padding-top: 100px;
   padding-bottom: 60px;
@@ -921,7 +920,7 @@ footer {
 
 .site {
   display: flex;
-  min-height: 77vh;
+  min-height: 79vh;
 }
 
 .site-content {
@@ -929,4 +928,8 @@ footer {
 }
 .app-root {
   width: 100%;
+}
+
+.form-bg {
+  display: flex;
 }

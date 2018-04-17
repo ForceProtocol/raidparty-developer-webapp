@@ -10,10 +10,11 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthService } from './services/auth.service';
 import { GameService } from './services/game.service';
+import { AppInterceptor } from './services/app.interceptor';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -47,7 +48,8 @@ import { NoGamesComponent } from './game/no-games/no-games.component';
     HttpClientModule,
     ToastrModule.forRoot()
   ],
-  providers: [AuthService, GameService],
+  providers: [AuthService, GameService,
+  { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
