@@ -69,6 +69,15 @@ export class AuthService implements CanActivate {
     return this.token;
   }
 
+  logout() {
+    //Api is not implemented yet so currently working with clearing localStorage
+    localStorage.clear();
+    this.isLoggedIn = false;
+    this.developer = {};
+    this.token = "";
+    return true;
+  }
+
   private setLocalStorage(response) {
     this.developer = response.developer;
     this.token = response.token;
