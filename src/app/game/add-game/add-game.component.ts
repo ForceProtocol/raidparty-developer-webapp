@@ -54,12 +54,12 @@ export class AddGameComponent implements OnInit {
   create() {
     this.addGameForm.value.avatar = this.fileData
     this.gameService.create(this.addGameForm.value)
-      .subscribe((data) => {
+      .subscribe((data: any) => {
         this.toaster.success('Success', "Your game added", {
           timeOut: 3000,
           positionClass: "toast-top-right"
         });
-        this.router.navigate(['/game/added']);
+        this.router.navigate(['/game/added', {gameId: data.gameId}]);
       },
       (errorObj) => {
         this.toaster.error('Error', errorObj.error.err, {
