@@ -1,0 +1,59 @@
+<div class="body-bg signup-bg">
+  <div class="form-bg">
+    <div class="wrapper">
+      <div class="logo">
+        <a href="">
+          <img src="assets/images/logo.png">
+        </a>
+      </div>
+      <form [formGroup]="signupForm">
+        <div class="form-heading">
+          <h3>Create your account</h3>
+        </div>
+        <div class="custom-form">
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <input type="text" name="" class="form-control" placeholder="First Name" formControlName="firstName">
+              <small [hidden]="signupForm.controls.firstName.valid || signupForm.controls.firstName.pristine" class="text-danger">
+                First Name is required
+              </small>
+            </div>
+            <div class="form-group col-sm-6">
+              <input type="text" name="" class="form-control" placeholder="Last Name" formControlName="lastName">
+              <small [hidden]="signupForm.controls.lastName.valid || signupForm.controls.lastName.pristine" class="text-danger">
+                Last Name is required
+              </small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <input type="email" name="" class="form-control" placeholder="email address" formControlName="email">
+              <small [hidden]="signupForm.controls.email.valid || signupForm.controls.email.pristine" class="text-danger">
+                Please enter a valid email
+              </small>
+            </div>
+            <div class="form-group col-sm-6">
+              <input type="password" name="" class="form-control" placeholder="password" formControlName="password">
+              <small [hidden]="signupForm.controls.password.valid || signupForm.controls.password.pristine" class="text-danger">
+                Password is required
+              </small>
+            </div>
+          </div>
+          <ul class="unstyled centered custom-checkbox">
+            <li>
+              <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" value="value1">
+              <label for="styled-checkbox-1">Agree with the <a href="#">Terms & Privacy</a></label>
+            </li>
+          </ul>
+          <div class="button">
+            <a (click)="signup()" class="btn btn-info">SIGN UP</a>
+          </div>
+          <div class="button signup-btn">
+            <a routerLink="/login" class="btn btn-default">SIGN IN</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- body-bg -->

@@ -1,0 +1,64 @@
+<section class="middle-section site-content">
+  <div class="container">
+    <div class="main-heading row btn-desk hidden-xs">
+      <div class="buttons back-btn pull-left col-md-4 col-sm-4 col-xs-4">
+        <a href="#" class="btn btn-default">BACK</a>
+      </div>
+      <h2 class="col-md-4 col-sm-4 col-xs-4">Your games</h2>
+      <div class="buttons back-btn pull-right text-right col-md-4 col-sm-4 col-xs-4">
+        <a routerLink="/games/add" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> ADD GAME</a>
+      </div>
+    </div>
+    <div class="main-heading row btn-mob">
+      <h2 class="col-md-12 col-sm-12 col-xs-12">Your games</h2>
+      <div class="buttons back-btn pull-left col-md-6 col-sm-6 col-xs-6">
+        <a href="#" class="btn btn-default">BACK</a>
+      </div>
+      <div class="buttons back-btn pull-right text-right col-md-6 col-sm-6 col-xs-6">
+        <a routerLink="/games/add" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span>  ADD GAME</a>
+      </div>
+    </div>
+
+    <div class="table-bg">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><span>Game Title</span></th>
+              <th><span>Player Introduced</span></th>
+              <th><span>Force reward</span></th>
+              <th><span>Force earned</span></th>
+              <th><span>Options</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let game of games">
+              <td>{{game.title}}</td>
+              <td>{{game.description}}</td>
+              <td>{{game.link}}</td>
+              <td>{{game.platform}}</td>
+              <td class="tooltip-hover" *ngIf="game">
+                <div type="button" class="btn btn-outline-primary" (click)="game.isCollapsed = !game.isCollapsed"
+                        [attr.aria-expanded]="!game.isCollapsed" aria-controls="collapseExample">
+                  <a><b [hidden]="!game.isCollapsed">More</b></a>
+                  <a><b [hidden]="game.isCollapsed">less</b></a>
+                </div>
+                <div id="collapseExample" [ngbCollapse]="game.isCollapsed">
+                  <div class="card">
+                    <div class="card-body">
+                      <ul>
+                        <li><a routerLink="/games/{{game.gameId}}/edit">Edit Game</a></li>
+                        <li><a href="#">View SDK Keys</a></li>
+                        <li><a (click)="delete(game.gameId, game.title)">Delete</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div> <!-- container -->
+</section> <!-- middle section -->
