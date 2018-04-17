@@ -38,7 +38,7 @@ export class GamesListComponent implements OnInit {
       })
   }
 
-  delete(gameId, title) {
+/*  delete(gameId, title) {
     this.gameService.delete(gameId, title)
       .subscribe((response) => {
         let index = this.games.indexOf()
@@ -54,6 +54,6 @@ export class GamesListComponent implements OnInit {
           positionClass: 'toast-top-center'
         });
       })
-  }
+  }*/
 
 }

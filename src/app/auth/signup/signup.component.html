@@ -41,12 +41,12 @@
           </div>
           <ul class="unstyled centered custom-checkbox">
             <li>
-              <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" value="value1">
+              <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" value="value1" formControlName="acceptTerms">
               <label for="styled-checkbox-1">Agree with the <a href="#">Terms & Privacy</a></label>
             </li>
           </ul>
           <div class="button">
-            <a (click)="signup()" class="btn btn-info">SIGN UP</a>
+            <a (click)="signup()" class="btn btn-info" [ngClass]="{'btn-invalid' : signupForm.invalid}">SIGN UP</a>
           </div>
           <div class="button signup-btn">
             <a routerLink="/login" class="btn btn-default">SIGN IN</a>
