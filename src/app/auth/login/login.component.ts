@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -12,13 +12,22 @@ import { Router } from '@angular/router'
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  error: string;
+  developerId: string;
+  pin: string;
 
   constructor(private fb: FormBuilder,
               private auth: AuthService,
               private toaster: ToastrService,
-              private router: Router) {
-    this.createForm();
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
+    let params = this.activatedRoute.snapshot.queryParams;
+    if (params.developer) {
+      this.developerId = params.developer;
+      this.pin = params.pin;
+      this.activateDevloper();
+    } else {
+      this.createForm();
+    }
   }
 
   ngOnInit() {
@@ -39,15 +48,32 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.loginForm.value)
       .subscribe((data) => {
         this.toaster.success('Success', "Logged in successfully", {
-          timeOut: 1000,
+          timeOut: 3000,
           positionClass: "toast-top-right"
         });
         this.router.navigate(['/games/list']);
       },
-      (error) => {
-        this.toaster.error('Error', error.message, {
+      (errorObj) => {
+        this.toaster.error('Error', errorObj.error.err, {
           timeOut: 3000,
-          positionClass: 'toast-bottom-center'
+          positionClass: 'toast-top-center'
+        });
+      });
+  }
+
+  activateDevloper() {
+    this.auth.activateDevloper(this.developerId, this.pin)
+      .subscribe((response) => {
+        this.toaster.success('Success', response.msg, {
+          timeOut: 3000,
+          positionClass: "toast-top-right"
+        });
+        this.router.navigate(['/login']);
+      },
+      (errorObj) => {
+        this.toaster.error('Error', errorObj.error.err, {
+          timeOut: 3000,
+          positionClass: 'toast-top-center'
         });
       });
   }

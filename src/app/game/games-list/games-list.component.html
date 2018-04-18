@@ -1,4 +1,4 @@
-<section class="middle-section">
+<section class="middle-section site-content">
   <div class="container">
     <div class="main-heading row btn-desk hidden-xs">
       <div class="buttons back-btn pull-left col-md-4 col-sm-4 col-xs-4">
@@ -25,9 +25,9 @@
           <thead>
             <tr>
               <th><span>Game Title</span></th>
-              <th><span>Player Introduced</span></th>
-              <th><span>Force reward</span></th>
-              <th><span>Force earned</span></th>
+              <th><span>Description</span></th>
+              <th><span>Download link</span></th>
+              <th><span>Platform</span></th>
               <th><span>Options</span></th>
             </tr>
           </thead>
@@ -48,8 +48,7 @@
                     <div class="card-body">
                       <ul>
                         <li><a routerLink="/games/{{game.gameId}}/edit">Edit Game</a></li>
-                        <li><a href="#">View SDK Keys</a></li>
-                        <li><a (click)="delete(game.gameId, game.title)">Delete</a></li>
+                        <li><a class="sdk-keys" (click)="openModal(game)">View SDK Keys</a></li>
                       </ul>
                     </div>
                   </div>
@@ -62,3 +61,24 @@
     </div>
   </div> <!-- container -->
 </section> <!-- middle section -->
+
+
+<div class="backdrop" [ngStyle]="{'display':display}"></div>
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{selectedGame.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>App Id: {{selectedGame.publicKey}}</p>
+        <p>App Key: {{selectedGame.privateKey}}</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal !-->

@@ -12,28 +12,28 @@
           <div class="form-group">
             <label>Game title</label>
             <input type="text" class="form-control" placeholder="Game title" formControlName="title">
-            <small [hidden]="addGameForm.controls.title.valid" class="text-danger">
+            <small [hidden]="addGameForm.controls.title.valid || addGameForm.controls.title.pristine" class="text-danger">
               Title is required
             </small>
           </div>
           <div class="form-group">
             <label>Description</label>
             <input type="text" class="form-control" placeholder="Description" formControlName="description">
-            <small [hidden]="addGameForm.controls.description.valid" class="text-danger">
+            <small [hidden]="addGameForm.controls.description.valid || addGameForm.controls.description.pristine" class="text-danger">
               Description is required
             </small>
           </div>
           <div class="form-group">
             <label>Platform</label>
             <input type="text" class="form-control" placeholder="IOS Android PC Playstation Xbox" formControlName="platform">
-            <small [hidden]="addGameForm.controls.platform.valid" class="text-danger">
+            <small [hidden]="addGameForm.controls.platform.valid || addGameForm.controls.platform.pristine" class="text-danger">
               Platform is required
             </small>
           </div>
           <div class="form-group">
             <label>Game download link</label>
             <input type="text" class="form-control" placeholder="App Stor or Play Market" formControlName="link">
-            <small [hidden]="addGameForm.controls.link.valid" class="text-danger">
+            <small [hidden]="addGameForm.controls.link.valid || addGameForm.controls.link.pristine" class="text-danger">
               Link is required
             </small>
           </div>

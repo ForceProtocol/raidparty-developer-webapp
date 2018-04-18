@@ -11,6 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 export class GamesListComponent implements OnInit {
   games: any = [];
   isCollapsed: boolean = true;
+  display='none';
+  selectedGame: any = {};
 
 
   constructor(private gameService: GameService,
@@ -30,15 +32,15 @@ export class GamesListComponent implements OnInit {
           this.router.navigate(['/games/empty'])
         }
       },
-      (error) => {
-        this.toaster.error('Error', error.message, {
+      (errorObj) => {
+        this.toaster.error('Error', errorObj.error.err, {
           timeOut: 3000,
-          positionClass: 'toast-bottom-center'
+          positionClass: 'toast-top-center'
         });
       })
   }
 
-  delete(gameId, title) {
+/*  delete(gameId, title) {
     this.gameService.delete(gameId, title)
       .subscribe((response) => {
         let index = this.games.indexOf()
@@ -48,12 +50,20 @@ export class GamesListComponent implements OnInit {
           positionClass: 'toast-top-right'
         });
       },
-      (error) => {
-        this.toaster.error('Error', error.message, {
+      (errorObj) => {
+        this.toaster.error('Error', errorObj.error.err, {
           timeOut: 3000,
-          positionClass: 'toast-bottom-center'
+          positionClass: 'toast-top-center'
         });
       })
+  }*/
+
+  openModal(game) {
+    this.display='block';
+    this.selectedGame = game;
   }
 
+  onCloseHandled() {
+    this.display='none';
+  }
 }

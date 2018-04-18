@@ -29,24 +29,34 @@ export class SignupComponent implements OnInit {
     this.signupForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', Validators.email],
-      password: ['', Validators.required]
+      email: ['', Validators.pattern(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)],
+      password: ['', Validators.required],
+      acceptTerms: [false, Validators.required]
     });
   }
 
   signup() {
+    // In case if user first check and then un-check the terms & condition
+    if(this.signupForm.value.acceptTerms == false) {
+      this.toaster.error('Please agree to Terms & Conditions', 'Error', {
+          timeOut: 3000,
+          positionClass: "toast-top-center"
+        });
+      return;
+    }
+
     this.auth.signup(this.signupForm.value)
       .subscribe((data) => {
-        this.toaster.success('Success', "Signed up successfully", {
+        this.toaster.success('Signed up successfully and activation link has been sent to your email inbox', 'Success', {
           timeOut: 3000,
           positionClass: "toast-top-right"
         });
         this.router.navigate(['/login']);
       },
-      (error) => {
-        this.toaster.error('Error', "You are not signed up please try again", {
+      (errorObj) => {
+        this.toaster.error('Error', errorObj.error.err, {
           timeOut: 3000,
-          positionClass: "toast-bottom-center"
+          positionClass: "toast-top-center"
         });
       })
   }
