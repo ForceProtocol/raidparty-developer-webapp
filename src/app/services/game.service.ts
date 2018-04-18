@@ -20,8 +20,15 @@ export class GameService {
     const formData = new FormData();
     formData.append('title', game.title);
     formData.append('description', game.description);
-    formData.append('platform', game.platform);
-    formData.append('link', game.link);
+    let selectedPlatformsArray = game.platforms.filter((pf) => pf.selected);
+    let platforms = [];
+    let links = [];
+    selectedPlatformsArray.forEach((pf) => {
+      platforms.push(pf.name);
+      links.push(pf.link);
+    })
+    formData.append('platform', JSON.stringify(platforms));
+    formData.append('link', JSON.stringify(links));
     formData.append('activeStatus', 'true');
     formData.append('avatar', game.avatar);
 

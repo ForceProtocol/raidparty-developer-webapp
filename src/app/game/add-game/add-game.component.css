@@ -5,3 +5,20 @@
 .browse-image {
   float: right;
 }
+
+.platforms-form-group {
+  display: flex;
+}
+
+.platforms-form-group .pf-select {
+  margin: 2%;
+}
+
+.platforms-form-group label {
+  margin-right: 2%;
+  margin-top: 2%;
+}
+
+.platforms-form-group .download-link-input {
+  height: 50%;
+}

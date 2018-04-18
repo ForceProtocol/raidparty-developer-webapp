@@ -23,19 +23,16 @@
               Description is required
             </small>
           </div>
-          <div class="form-group">
-            <label>Platform</label>
-            <input type="text" class="form-control" placeholder="IOS Android PC Playstation Xbox" formControlName="platform">
-            <small [hidden]="addGameForm.controls.platform.valid || addGameForm.controls.platform.pristine" class="text-danger">
-              Platform is required
-            </small>
-          </div>
-          <div class="form-group">
-            <label>Game download link</label>
-            <input type="text" class="form-control" placeholder="App Stor or Play Market" formControlName="link">
-            <small [hidden]="addGameForm.controls.link.valid || addGameForm.controls.link.pristine" class="text-danger">
-              Link is required
-            </small>
+          <label>Platforms and Links</label>
+          <div formArrayName="platforms" *ngFor="let pf of addGameForm.get('platforms').controls; let i = index;">
+            <div [formGroupName]="i" class="platforms-form-group">
+
+              <input formControlName="selected" placeholder="Item name" type="checkbox" class="pf-select"><label>{{pf.controls.name.value}}</label>
+              <input class="form-control download-link-input" formControlName="link" placeholder="Download Link" *ngIf="pf.controls.selected.value">
+              <small [hidden]="!pf.controls.selected.value || pf.controls.link.valid || pf.controls.link.pristine" class="text-danger">
+                Link is required
+              </small>
+            </div>
           </div>
           <div class="form-group" [hidden]="gameId">
             <div class="input-group-addon">
