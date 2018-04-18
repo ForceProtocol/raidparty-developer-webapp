@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { GameService } from '../../services/game.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router, ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-game',
@@ -59,7 +59,7 @@ export class AddGameComponent implements OnInit {
           timeOut: 3000,
           positionClass: "toast-top-right"
         });
-        this.router.navigate(['/game/added', {gameId: data.gameId}]);
+        this.router.navigate(['/game/added'], { queryParams: { gameId: data.gameId }});
       },
       (errorObj) => {
         this.toaster.error('Error', errorObj.error.err, {
@@ -87,8 +87,15 @@ export class AddGameComponent implements OnInit {
   }
 
   upload(fileInput) {
-    this.fileData = fileInput.target.files[0];
-    this.imageUrl = fileInput.target.value;
-  }
+    if (fileInput.target.files && fileInput.target.files[0]) {
+      this.fileData = fileInput.target.files[0];
+      let reader = new FileReader();
 
+      reader.onload = (event:any) => {
+        this.imageUrl = event.target.result;
+      }
+
+      reader.readAsDataURL(this.fileData);
+    }
+  }
 }

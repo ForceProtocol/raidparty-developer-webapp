@@ -29,8 +29,8 @@ export class GameService {
       .set('Content-Type', 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW')
 
     return this.http.post(`${environment.API_HOST}/app/developer/game?token=${this.auth.getToken()}`, formData)
-      .map((response) => {
-        return response;
+      .map((response: any) => {
+        return response.game;
       }, (error) => {
         return error
       });
