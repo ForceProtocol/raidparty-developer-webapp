@@ -20,8 +20,15 @@ export class GameService {
     const formData = new FormData();
     formData.append('title', game.title);
     formData.append('description', game.description);
-    formData.append('platform', game.platform);
-    formData.append('link', game.link);
+    let selectedPlatformsArray = game.platforms.filter((pf) => pf.selected);
+    let platforms = [];
+    let links = [];
+    selectedPlatformsArray.forEach((pf) => {
+      platforms.push(pf.name);
+      links.push(pf.link);
+    })
+    formData.append('platform', JSON.stringify(platforms));
+    formData.append('link', JSON.stringify(links));
     formData.append('activeStatus', 'true');
     formData.append('avatar', game.avatar);
 
@@ -29,8 +36,8 @@ export class GameService {
       .set('Content-Type', 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW')
 
     return this.http.post(`${environment.API_HOST}/app/developer/game?token=${this.auth.getToken()}`, formData)
-      .map((response) => {
-        return response;
+      .map((response: any) => {
+        return response.game;
       }, (error) => {
         return error
       });

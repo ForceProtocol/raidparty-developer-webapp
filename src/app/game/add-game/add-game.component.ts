@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { GameService } from '../../services/game.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router, ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router';
+
+const IMAGE_FORMATS = ["png", "jpg", "jpeg"];
+const PLATFORMS = [{name:"IOS", link: "", selected: false}, {name: "Android", link: "", selected: false},
+                  {name: "PC", link: "", selected: false},
+                  {name: "Playstation", link: "", selected: false}, {name: "Xbox", link: "", selected: false}];
 
 @Component({
   selector: 'app-add-game',
@@ -15,6 +20,7 @@ export class AddGameComponent implements OnInit {
   fileData: any;
   gameId: any = null;
   imageUrl: string = "assets/images/image.png";
+  imageFormatError: boolean = false;
 
   constructor(private fb: FormBuilder,
               private auth: AuthService,
@@ -38,6 +44,9 @@ export class AddGameComponent implements OnInit {
           })
         })
     }
+    PLATFORMS.forEach((pf) => {
+      (this.addGameForm.get('platforms') as FormArray).push(this.createItem(pf));
+    })
   }
 
   createForm() {
@@ -45,21 +54,21 @@ export class AddGameComponent implements OnInit {
     this.addGameForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      platform: ['', Validators.required],
-      link: ['', Validators.required],
-      avatar: []
+      avatar: [],
+      platforms: this.fb.array([ ])
     });
   }
 
   create() {
     this.addGameForm.value.avatar = this.fileData
+
     this.gameService.create(this.addGameForm.value)
       .subscribe((data: any) => {
         this.toaster.success('Success', "Your game added", {
           timeOut: 3000,
           positionClass: "toast-top-right"
         });
-        this.router.navigate(['/game/added', {gameId: data.gameId}]);
+        this.router.navigate(['/game/added'], { queryParams: { gameId: data.gameId }});
       },
       (errorObj) => {
         this.toaster.error('Error', errorObj.error.err, {
@@ -67,6 +76,14 @@ export class AddGameComponent implements OnInit {
           positionClass: "toast-top-center"
         });
       })
+  }
+
+  createItem(pf): FormGroup {
+    return this.fb.group({
+      name: pf.name,
+      link: [pf.link],
+      selected: pf.selected
+    });
   }
 
   update() {
@@ -87,8 +104,20 @@ export class AddGameComponent implements OnInit {
   }
 
   upload(fileInput) {
-    this.fileData = fileInput.target.files[0];
-    this.imageUrl = fileInput.target.value;
-  }
+    if (fileInput.target.files && fileInput.target.files[0]) {
+      this.fileData = fileInput.target.files[0];
+      if (IMAGE_FORMATS.includes(this.fileData.type.split("/")[1])) {
+        this.imageFormatError = false;
+        let reader = new FileReader();
 
+        reader.onload = (event:any) => {
+          this.imageUrl = event.target.result;
+        }
+
+        reader.readAsDataURL(this.fileData);
+      } else {
+        this.imageFormatError = true;
+      }
+    }
+  }
 }
