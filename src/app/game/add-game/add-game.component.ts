@@ -5,6 +5,8 @@ import { GameService } from '../../services/game.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 
+const IMAGE_FORMATS = ["png", "jpg", "jpeg"];
+
 @Component({
   selector: 'app-add-game',
   templateUrl: './add-game.component.html',
@@ -15,6 +17,7 @@ export class AddGameComponent implements OnInit {
   fileData: any;
   gameId: any = null;
   imageUrl: string = "assets/images/image.png";
+  imageFormatError: boolean = false;
 
   constructor(private fb: FormBuilder,
               private auth: AuthService,
@@ -89,13 +92,18 @@ export class AddGameComponent implements OnInit {
   upload(fileInput) {
     if (fileInput.target.files && fileInput.target.files[0]) {
       this.fileData = fileInput.target.files[0];
-      let reader = new FileReader();
+      if (IMAGE_FORMATS.includes(this.fileData.type.split("/")[1])) {
+        this.imageFormatError = false;
+        let reader = new FileReader();
 
-      reader.onload = (event:any) => {
-        this.imageUrl = event.target.result;
+        reader.onload = (event:any) => {
+          this.imageUrl = event.target.result;
+        }
+
+        reader.readAsDataURL(this.fileData);
+      } else {
+        this.imageFormatError = true;
       }
-
-      reader.readAsDataURL(this.fileData);
     }
   }
 }

@@ -45,6 +45,11 @@
                 <img src="{{imageUrl}}">
               </div>
             </div>
+
+            <small [hidden]="!imageFormatError" class="text-danger">
+              Your File format is not correct, please upload an image with correct format.
+            </small>
+            <p class="text-info">Upload an image of size 250pxX250px</p>
           </div>
           <div class="buttons pull-left">
             <a href="#" class="btn btn-default">BACK</a>
