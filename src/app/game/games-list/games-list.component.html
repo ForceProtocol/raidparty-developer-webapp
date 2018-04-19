@@ -35,8 +35,16 @@
             <tr *ngFor="let game of games">
               <td>{{game.title}}</td>
               <td>{{game.description}}</td>
-              <td>{{game.link}}</td>
-              <td>{{game.platform}}</td>
+              <td>
+                <div *ngFor="let pf of game.platform">
+                  {{pf.link}}
+                </div>
+              </td>
+              <td>
+                <div *ngFor="let pf of game.platform">
+                  {{pf.name}}
+                </div>
+              </td>
               <td class="tooltip-hover" *ngIf="game">
                 <div type="button" class="btn btn-outline-primary" (click)="game.isCollapsed = !game.isCollapsed"
                         [attr.aria-expanded]="!game.isCollapsed" aria-controls="collapseExample">

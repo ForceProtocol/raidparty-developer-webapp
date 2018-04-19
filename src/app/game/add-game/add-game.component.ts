@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { GameService } from '../../services/game.service';
@@ -21,32 +21,51 @@ export class AddGameComponent implements OnInit {
   gameId: any = null;
   imageUrl: string = "assets/images/image.png";
   imageFormatError: boolean = false;
+  game: any;
 
   constructor(private fb: FormBuilder,
     private auth: AuthService,
     private router: Router,
     private toaster: ToastrService,
     private gameService: GameService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private cdr: ChangeDetectorRef) {
     this.createForm();
   }
 
   ngOnInit() {
+    PLATFORMS.forEach((pf) => {
+      (this.addGameForm.get('platforms') as FormArray).push(this.createItem(pf));
+    })
     this.gameId = this.activatedRoute.snapshot.params.gameId;
     if (this.gameId) {
       this.gameService.getGame(this.gameId)
         .subscribe((game) => {
+          this.game = game;
           this.addGameForm.patchValue({
             title: game.title,
-            description: game.description,
-            platform: game.platform,
-            link: game.link
+            description: game.description
+          });
+
+          const platformsControl = <FormArray>this.addGameForm.controls["platforms"];
+          this.game.platform.forEach((pf, index) =>  {
+
+            platformsControl.value.forEach((pfc, index) => {
+              if (pfc.name == pf.name) {
+                let selected = platformsControl.controls[index].get("selected");
+                selected.patchValue(true)
+                let link = platformsControl.controls[index].get("link");
+                link.patchValue(pf.link)
+              }
+            })
           })
         })
     }
-    PLATFORMS.forEach((pf) => {
-      (this.addGameForm.get('platforms') as FormArray).push(this.createItem(pf));
-    })
+
+  }
+
+  ngAfterViewChecked(){
+    this.cdr.detectChanges();
   }
 
   createForm() {
@@ -60,6 +79,13 @@ export class AddGameComponent implements OnInit {
   }
 
   create() {
+    if(!this.isPlatformSelected()) {
+      this.toaster.error('Please Selected any of the platform from the list', 'Error', {
+          timeOut: 3000,
+          positionClass: "toast-top-center"
+        });
+      return;
+    }
     this.addGameForm.value.avatar = this.fileData
 
     this.gameService.create(this.addGameForm.value)
@@ -81,12 +107,13 @@ export class AddGameComponent implements OnInit {
   createItem(pf): FormGroup {
     return this.fb.group({
       name: pf.name,
-      link: [pf.link],
+      link: [pf.link, this.isValidLink(pf.name)],
       selected: pf.selected
     });
   }
 
   update() {
+    this.addGameForm.value.avatar = this.fileData
     this.gameService.update(this.addGameForm.value, this.gameId)
       .subscribe((data) => {
         this.toaster.success('Success', "Your game updated successfully", {
@@ -139,4 +166,20 @@ export class AddGameComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  isValidLink(platformName: boolean) {
+    return (input: FormControl) => {
+      let selectedPlatform = this.addGameForm.value.platforms.filter((pf) => pf.name == platformName)[0]
+      if (selectedPlatform && selectedPlatform.selected) {
+        let expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+        let regex = new RegExp(expression);
+        return input.value.match(regex) ? null : { linkInvalid: true }
+      } else {
+        return null
+      }
+    };
+  }
+
+  isPlatformSelected() {
+    return this.addGameForm.value.platforms.filter((pf) => pf.selected).length > 0;
+  }
 }
