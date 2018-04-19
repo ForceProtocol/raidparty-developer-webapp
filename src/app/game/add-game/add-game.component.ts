@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { GameService } from '../../services/game.service';
@@ -27,7 +27,8 @@ export class AddGameComponent implements OnInit {
     private router: Router,
     private toaster: ToastrService,
     private gameService: GameService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private cdr: ChangeDetectorRef) {
     this.createForm();
   }
 
@@ -49,6 +50,10 @@ export class AddGameComponent implements OnInit {
     })
   }
 
+  ngAfterViewChecked(){
+    this.cdr.detectChanges();
+  }
+
   createForm() {
 
     this.addGameForm = this.fb.group({
@@ -60,6 +65,13 @@ export class AddGameComponent implements OnInit {
   }
 
   create() {
+    if(!this.isPlatformSelected()) {
+      this.toaster.error('Please Selected any of the platform from the list', 'Error', {
+          timeOut: 3000,
+          positionClass: "toast-top-center"
+        });
+      return;
+    }
     this.addGameForm.value.avatar = this.fileData
 
     this.gameService.create(this.addGameForm.value)
@@ -81,7 +93,7 @@ export class AddGameComponent implements OnInit {
   createItem(pf): FormGroup {
     return this.fb.group({
       name: pf.name,
-      link: [pf.link],
+      link: [pf.link, this.isValidLink(pf.name)],
       selected: pf.selected
     });
   }
@@ -139,4 +151,20 @@ export class AddGameComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  isValidLink(platformName: boolean) {
+    return (input: FormControl) => {
+      let selectedPlatform = this.addGameForm.value.platforms.filter((pf) => pf.name == platformName)[0]
+      if (selectedPlatform && selectedPlatform.selected) {
+        let expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+        let regex = new RegExp(expression);
+        return input.value.match(regex) ? null : { linkInvalid: true }
+      } else {
+        return null
+      }
+    };
+  }
+
+  isPlatformSelected() {
+    return this.addGameForm.value.platforms.filter((pf) => pf.selected).length > 0;
+  }
 }

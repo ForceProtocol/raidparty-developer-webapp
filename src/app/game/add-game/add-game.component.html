@@ -29,8 +29,8 @@
 
               <input formControlName="selected" placeholder="Item name" type="checkbox" class="pf-select"><label>{{pf.controls.name.value}}</label>
               <input class="form-control download-link-input" formControlName="link" placeholder="Download Link" *ngIf="pf.controls.selected.value">
-              <small [hidden]="!pf.controls.selected.value || pf.controls.link.valid || pf.controls.link.pristine" class="text-danger">
-                Link is required
+              <small [hidden]="!pf.controls.selected.value || pf.controls.link.valid" class="text-danger">
+                Enter download link
               </small>
             </div>
           </div>

@@ -22,7 +22,6 @@ export class GameService {
     formData.append('description', game.description);
     let selectedPlatformsArray = game.platforms.filter((pf) => pf.selected);
     let platforms = [];
-    let links = [];
     selectedPlatformsArray.forEach((pf) => {
       platforms.push({ name: pf.name, link: pf.link });
     });
