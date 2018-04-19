@@ -21,6 +21,7 @@ export class AddGameComponent implements OnInit {
   gameId: any = null;
   imageUrl: string = "assets/images/image.png";
   imageFormatError: boolean = false;
+  game: any;
 
   constructor(private fb: FormBuilder,
     private auth: AuthService,
@@ -33,21 +34,34 @@ export class AddGameComponent implements OnInit {
   }
 
   ngOnInit() {
+    PLATFORMS.forEach((pf) => {
+      (this.addGameForm.get('platforms') as FormArray).push(this.createItem(pf));
+    })
     this.gameId = this.activatedRoute.snapshot.params.gameId;
     if (this.gameId) {
       this.gameService.getGame(this.gameId)
         .subscribe((game) => {
+          this.game = game;
           this.addGameForm.patchValue({
             title: game.title,
-            description: game.description,
-            platform: game.platform,
-            link: game.link
+            description: game.description
+          });
+
+          const platformsControl = <FormArray>this.addGameForm.controls["platforms"];
+          this.game.platform.forEach((pf, index) =>  {
+
+            platformsControl.value.forEach((pfc, index) => {
+              if (pfc.name == pf.name) {
+                let selected = platformsControl.controls[index].get("selected");
+                selected.patchValue(true)
+                let link = platformsControl.controls[index].get("link");
+                link.patchValue(pf.link)
+              }
+            })
           })
         })
     }
-    PLATFORMS.forEach((pf) => {
-      (this.addGameForm.get('platforms') as FormArray).push(this.createItem(pf));
-    })
+
   }
 
   ngAfterViewChecked(){

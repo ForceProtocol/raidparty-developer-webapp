@@ -62,7 +62,11 @@ export class GameService {
   getGames() {
     return this.http.get(`${environment.API_HOST}/app/developer/games?token=${this.auth.getToken()}`)
       .map((response: any) => {
-        return response.games;
+        let games = response.games;
+        games.forEach((game) => {
+          game.platform = JSON.parse(game.platform);
+        })
+        return games;
       }, (error) => {
         return error
       });
@@ -71,7 +75,9 @@ export class GameService {
   getGame(gameId) {
     return this.http.get(`${environment.API_HOST}/app/developer/game/${gameId}?token=${this.auth.getToken()}`)
       .map((response: any) => {
-        return response.game;
+        let game = response.game;
+        game.platform = JSON.parse(game.platform);
+        return game;
       }, (error) => {
         return error
       });
