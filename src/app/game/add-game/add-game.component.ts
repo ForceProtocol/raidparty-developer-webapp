@@ -68,11 +68,7 @@ export class AddGameComponent implements OnInit {
           timeOut: 3000,
           positionClass: "toast-top-right"
         });
-<<<<<<< Updated upstream
         this.router.navigate(['/game/added'], { queryParams: { gameId: data.gameId } });
-=======
-        this.router.navigate(['/game/added', { gameId: data.gameId }]);
->>>>>>> Stashed changes
       },
         (errorObj) => {
           this.toaster.error('Error', errorObj.error.err, {
