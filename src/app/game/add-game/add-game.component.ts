@@ -6,9 +6,9 @@ import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 
 const IMAGE_FORMATS = ["png", "jpg", "jpeg"];
-const PLATFORMS = [{ name: "IOS", link: "", selected: false }, { name: "Android", link: "", selected: false },
-{ name: "PC", link: "", selected: false },
-{ name: "Playstation", link: "", selected: false }, { name: "Xbox", link: "", selected: false }];
+const PLATFORMS = [{ name: "ios", link: "", selected: false }, { name: "android", link: "", selected: false },
+{ name: "pc", link: "", selected: false },
+{ name: "playstation", link: "", selected: false }, { name: "xbox", link: "", selected: false }];
 
 @Component({
   selector: 'app-add-game',
