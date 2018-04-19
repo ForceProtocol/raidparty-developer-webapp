@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { environment } from '../../environments/environment' ;
+import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service'
 
@@ -13,7 +13,7 @@ export class GameService {
   private token: any;
 
   constructor(private http: HttpClient,
-              private auth: AuthService) { }
+    private auth: AuthService) { }
 
   create(game) {
 
@@ -24,11 +24,9 @@ export class GameService {
     let platforms = [];
     let links = [];
     selectedPlatformsArray.forEach((pf) => {
-      platforms.push(pf.name);
-      links.push(pf.link);
-    })
+      platforms.push({ name: pf.name, link: pf.link });
+    });
     formData.append('platform', JSON.stringify(platforms));
-    formData.append('link', JSON.stringify(links));
     formData.append('activeStatus', 'true');
     formData.append('avatar', game.avatar);
 
@@ -54,7 +52,7 @@ export class GameService {
 
   delete(gameId, title) {
     let params = new HttpParams().set('title', title);
-    return this.http.delete(`${environment.API_HOST}/app/developer/game/${gameId}?token=${this.auth.getToken()}`, {params: params})
+    return this.http.delete(`${environment.API_HOST}/app/developer/game/${gameId}?token=${this.auth.getToken()}`, { params: params })
       .map((response: any) => {
         return response;
       }, (error) => {
