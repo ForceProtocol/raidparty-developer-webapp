@@ -41,7 +41,18 @@ export class GameService {
   }
 
   update(game, gameId) {
-    return this.http.post(`${environment.API_HOST}/app/developer/game/${gameId}?token=${this.auth.getToken()}`, game)
+    const formData = new FormData();
+    formData.append('title', game.title);
+    formData.append('description', game.description);
+    let selectedPlatformsArray = game.platforms.filter((pf) => pf.selected);
+    let platforms = [];
+    selectedPlatformsArray.forEach((pf) => {
+      platforms.push({ name: pf.name, link: pf.link });
+    });
+    formData.append('platform', JSON.stringify(platforms));
+    formData.append('activeStatus', 'true');
+    formData.append('avatar', game.avatar);
+    return this.http.post(`${environment.API_HOST}/app/developer/game/${gameId}?token=${this.auth.getToken()}`, formData)
       .map((response: any) => {
         return response.game;
       }, (error) => {
