@@ -112,6 +112,7 @@ export class AddGameComponent implements OnInit {
         this.readFile(this.fileData, reader, (result) => {
           const image = document.createElement('img');
           image.src = result;
+          this.imageUrl = result;
           image.onload = () => {
             if (image.width < 250 || image.height < 250 || image.width > 500 || image.height > 500) {
               this.toaster.error('Error', 'Avtar image resolution should be between 250 x 250 and 500 x 500', {
@@ -124,7 +125,6 @@ export class AddGameComponent implements OnInit {
       } else {
         this.imageFormatError = true;
       }
-      this.imageUrl = fileInput.target.value;
     }
   }
 
