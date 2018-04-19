@@ -6,9 +6,9 @@ import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 
 const IMAGE_FORMATS = ["png", "jpg", "jpeg"];
-const PLATFORMS = [{name:"IOS", link: "", selected: false}, {name: "Android", link: "", selected: false},
-                  {name: "PC", link: "", selected: false},
-                  {name: "Playstation", link: "", selected: false}, {name: "Xbox", link: "", selected: false}];
+const PLATFORMS = [{ name: "IOS", link: "", selected: false }, { name: "Android", link: "", selected: false },
+{ name: "PC", link: "", selected: false },
+{ name: "Playstation", link: "", selected: false }, { name: "Xbox", link: "", selected: false }];
 
 @Component({
   selector: 'app-add-game',
@@ -23,11 +23,11 @@ export class AddGameComponent implements OnInit {
   imageFormatError: boolean = false;
 
   constructor(private fb: FormBuilder,
-              private auth: AuthService,
-              private router: Router,
-              private toaster: ToastrService,
-              private gameService: GameService,
-              private activatedRoute: ActivatedRoute ) {
+    private auth: AuthService,
+    private router: Router,
+    private toaster: ToastrService,
+    private gameService: GameService,
+    private activatedRoute: ActivatedRoute) {
     this.createForm();
   }
 
@@ -55,7 +55,7 @@ export class AddGameComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       avatar: [],
-      platforms: this.fb.array([ ])
+      platforms: this.fb.array([])
     });
   }
 
@@ -68,14 +68,14 @@ export class AddGameComponent implements OnInit {
           timeOut: 3000,
           positionClass: "toast-top-right"
         });
-        this.router.navigate(['/game/added'], { queryParams: { gameId: data.gameId }});
+        this.router.navigate(['/game/added'], { queryParams: { gameId: data.gameId } });
       },
-      (errorObj) => {
-        this.toaster.error('Error', errorObj.error.err, {
-          timeOut: 3000,
-          positionClass: "toast-top-center"
-        });
-      })
+        (errorObj) => {
+          this.toaster.error('Error', errorObj.error.err, {
+            timeOut: 3000,
+            positionClass: "toast-top-center"
+          });
+        })
   }
 
   createItem(pf): FormGroup {
@@ -95,29 +95,48 @@ export class AddGameComponent implements OnInit {
         });
         this.router.navigate(['/games/list']);
       },
-      (errorObj) => {
-        this.toaster.error('Error', errorObj.error.err, {
-          timeOut: 3000,
-          positionClass: "toast-top-center"
-        });
-      })
+        (errorObj) => {
+          this.toaster.error('Error', errorObj.error.err, {
+            timeOut: 3000,
+            positionClass: "toast-top-center"
+          });
+        })
   }
 
   upload(fileInput) {
     if (fileInput.target.files && fileInput.target.files[0]) {
       this.fileData = fileInput.target.files[0];
-      if (IMAGE_FORMATS.includes(this.fileData.type.split("/")[1])) {
+      if (IMAGE_FORMATS.includes(this.fileData.type.split('/')[1])) {
         this.imageFormatError = false;
-        let reader = new FileReader();
-
-        reader.onload = (event:any) => {
-          this.imageUrl = event.target.result;
-        }
-
-        reader.readAsDataURL(this.fileData);
+        const reader = new FileReader();
+        this.readFile(this.fileData, reader, (result) => {
+          const image = document.createElement('img');
+          image.src = result;
+          this.imageUrl = result;
+          image.onload = () => {
+            if (image.width < 250 || image.height < 250 || image.width > 500 || image.height > 500) {
+              this.toaster.error('Error', 'Avtar image resolution should be between 250 x 250 and 500 x 500', {
+                timeOut: 3000,
+                positionClass: 'toast-top-center'
+              });
+            }
+          };
+        });
       } else {
         this.imageFormatError = true;
       }
     }
   }
+
+  readFile(file, reader, callback) {
+    // Set a callback funtion to fire after the file is fully loaded
+    reader.onload = () => {
+      // callback with the results
+      callback(reader.result);
+    };
+
+    // Read the file
+    reader.readAsDataURL(file);
+  }
+
 }
