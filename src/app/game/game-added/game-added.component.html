@@ -4,9 +4,9 @@
       <h2>Congratulation!</h2>
     </div>
     <div class="game-image">
-      <img src="assets/images/game-image.png">
+      <img *ngIf = "base64GameAvatar" [src]="'data:image/jpg;base64,'+base64GameAvatar">
       <div class="image-text">
-        <p class="game-name">ARMA III</p>
+        <p class="game-name">{{game.title}}</p>
         <p class="title-text">New game has been added successfully!</p>
       </div>
     </div>
