@@ -114,7 +114,7 @@ export class AddGameComponent implements OnInit {
   }
 
   update() {
-    this.addGameForm.value.avatar = this.fileData
+    this.addGameForm.value.avatar = this.fileData ? this.fileData : new File([this.game.avatar], "temp", {type: "image/jpg"});
     this.gameService.update(this.addGameForm.value, this.gameId)
       .subscribe((data) => {
         this.toaster.success("Your game updated successfully", 'Success', {
