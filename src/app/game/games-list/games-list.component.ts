@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from '../../services/game.service';
 import { Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-games-list',
@@ -17,7 +18,8 @@ export class GamesListComponent implements OnInit {
 
   constructor(private gameService: GameService,
               private router: Router,
-              private toaster: ToastrService) {
+              private toaster: ToastrService,
+              private _location: Location) {
     this.getGames();
   }
 
@@ -33,7 +35,7 @@ export class GamesListComponent implements OnInit {
         }
       },
       (errorObj) => {
-        this.toaster.error('Error', errorObj.error.err, {
+        this.toaster.error(errorObj.error.err, 'Error', {
           timeOut: 3000,
           positionClass: 'toast-top-center'
         });
@@ -58,6 +60,13 @@ export class GamesListComponent implements OnInit {
       })
   }*/
 
+  copied() {
+    this.toaster.success('Text copied!',"", {
+      timeOut: 3000,
+      positionClass: 'toast-top-right'
+    });
+  }
+
   openModal(game) {
     this.display='block';
     this.selectedGame = game;
@@ -65,5 +74,9 @@ export class GamesListComponent implements OnInit {
 
   onCloseHandled() {
     this.display='none';
+  }
+
+  backClicked() {
+    this._location.back();
   }
 }

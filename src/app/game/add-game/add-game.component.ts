@@ -46,6 +46,7 @@ export class AddGameComponent implements OnInit {
             title: game.title,
             description: game.description
           });
+          this.imageUrl = "data:image/jpg;base64," + this.game.avatar;
 
           const platformsControl = <FormArray>this.addGameForm.controls["platforms"];
           this.game.platform.forEach((pf, index) =>  {
@@ -90,14 +91,14 @@ export class AddGameComponent implements OnInit {
 
     this.gameService.create(this.addGameForm.value)
       .subscribe((data: any) => {
-        this.toaster.success('Success', "Your game added", {
+        this.toaster.success("Your game added", 'Success', {
           timeOut: 3000,
           positionClass: "toast-top-right"
         });
         this.router.navigate(['/game/added'], { queryParams: { gameId: data.gameId } });
       },
         (errorObj) => {
-          this.toaster.error('Error', errorObj.error.err, {
+          this.toaster.error(errorObj.error.err, 'Error', {
             timeOut: 3000,
             positionClass: "toast-top-center"
           });
@@ -116,14 +117,14 @@ export class AddGameComponent implements OnInit {
     this.addGameForm.value.avatar = this.fileData
     this.gameService.update(this.addGameForm.value, this.gameId)
       .subscribe((data) => {
-        this.toaster.success('Success', "Your game updated successfully", {
+        this.toaster.success("Your game updated successfully", 'Success', {
           timeOut: 3000,
           positionClass: "toast-top-right"
         });
         this.router.navigate(['/games/list']);
       },
         (errorObj) => {
-          this.toaster.error('Error', errorObj.error.err, {
+          this.toaster.error(errorObj.error.err, 'Error', {
             timeOut: 3000,
             positionClass: "toast-top-center"
           });
@@ -137,22 +138,27 @@ export class AddGameComponent implements OnInit {
         this.imageFormatError = false;
         const reader = new FileReader();
         this.readFile(this.fileData, reader, (result) => {
-          const image = document.createElement('img');
-          image.src = result;
-          this.imageUrl = result;
-          image.onload = () => {
-            if (image.width < 250 || image.height < 250 || image.width > 500 || image.height > 500) {
-              this.toaster.error('Error', 'Avtar image resolution should be between 250 x 250 and 500 x 500', {
-                timeOut: 3000,
-                positionClass: 'toast-top-center'
-              });
-            }
-          };
+          this.checkImageSize(result);
         });
       } else {
         this.imageFormatError = true;
       }
     }
+  }
+
+  checkImageSize(result) {
+    const image = document.createElement('img');
+    image.src = result;
+    image.onload = () => {
+      if (image.width < 250 || image.height < 250 || image.width > 500 || image.height > 500) {
+        this.toaster.error('Avtar image resolution should be between 250 x 250 and 500 x 500', 'Error', {
+          timeOut: 3000,
+          positionClass: 'toast-top-center'
+        });
+      } else {
+        this.imageUrl = result;
+      }
+    };
   }
 
   readFile(file, reader, callback) {

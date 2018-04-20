@@ -54,7 +54,7 @@ export class SignupComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       (errorObj) => {
-        this.toaster.error('Error', errorObj.error.err, {
+        this.toaster.error(errorObj.error.err, 'Error', {
           timeOut: 3000,
           positionClass: "toast-top-center"
         });
