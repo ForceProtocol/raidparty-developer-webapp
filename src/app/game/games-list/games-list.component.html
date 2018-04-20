@@ -2,7 +2,7 @@
   <div class="container">
     <div class="main-heading row btn-desk hidden-xs">
       <div class="buttons back-btn pull-left col-md-4 col-sm-4 col-xs-4">
-        <a href="#" class="btn btn-default">BACK</a>
+        <a (click)="backClicked()" class="btn btn-default">BACK</a>
       </div>
       <h2 class="col-md-4 col-sm-4 col-xs-4">Your games</h2>
       <div class="buttons back-btn pull-right text-right col-md-4 col-sm-4 col-xs-4">
@@ -46,18 +46,15 @@
                 </div>
               </td>
               <td class="tooltip-hover" *ngIf="game">
-                <div type="button" class="btn btn-outline-primary" (click)="game.isCollapsed = !game.isCollapsed"
-                        [attr.aria-expanded]="!game.isCollapsed" aria-controls="collapseExample">
-                  <a><b [hidden]="!game.isCollapsed">More</b></a>
-                  <a><b [hidden]="game.isCollapsed">less</b></a>
-                </div>
-                <div id="collapseExample" [ngbCollapse]="game.isCollapsed">
-                  <div class="card">
-                    <div class="card-body">
-                      <ul>
+
+                <div class="row">
+                  <div class="col">
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-info" id="dropdownBasic1" ngbDropdownToggle>More</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                         <li><a routerLink="/games/{{game.gameId}}/edit">Edit Game</a></li>
                         <li><a class="sdk-keys" (click)="openModal(game)">View SDK Keys</a></li>
-                      </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -80,8 +77,16 @@
         <h4 class="modal-title">{{selectedGame.title}}</h4>
       </div>
       <div class="modal-body">
-        <p>App Id: {{selectedGame.publicKey}}</p>
-        <p>App Key: {{selectedGame.privateKey}}</p>
+        <div class="form-group">
+          <label>App Id:</label>
+          <input class="form-control" #inputTarget1 [(ngModel)]="selectedGame.publicKey" readonly="readonly">
+          <button class="btn btn-info" [ngxClipboard]="inputTarget1" title="copy to clipboard" (click)="copied()">Copy</button>
+        </div>
+        <div class="form-group">
+          <label>App Key:</label>
+          <input class="form-control" #inputTarget2 [(ngModel)]="selectedGame.privateKey" readonly="readonly">
+          <div class="btn btn-info" [ngxClipboard]="inputTarget2" (click)="copied()" title="copy to clipboard">Copy</div>
+        </div>
       </div>
 
       <div class="modal-footer">

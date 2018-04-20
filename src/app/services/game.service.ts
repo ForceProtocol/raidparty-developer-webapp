@@ -35,8 +35,6 @@ export class GameService {
     return this.http.post(`${environment.API_HOST}/app/developer/game?token=${this.auth.getToken()}`, formData)
       .map((response: any) => {
         return response.game;
-      }, (error) => {
-        return error
       });
   }
 
@@ -55,8 +53,6 @@ export class GameService {
     return this.http.post(`${environment.API_HOST}/app/developer/game/${gameId}?token=${this.auth.getToken()}`, formData)
       .map((response: any) => {
         return response.game;
-      }, (error) => {
-        return error
       });
   }
 
@@ -78,8 +74,6 @@ export class GameService {
           game.platform = JSON.parse(game.platform);
         })
         return games;
-      }, (error) => {
-        return error
       });
   }
 
@@ -89,8 +83,6 @@ export class GameService {
         let game = response.game;
         game.platform = JSON.parse(game.platform);
         return game;
-      }, (error) => {
-        return error
       });
   }
 
@@ -98,8 +90,6 @@ export class GameService {
     return this.http.get(`${environment.API_HOST}/app/developer/balance?token=${this.auth.getToken()}`)
       .map((response: any) => {
         return response.totalForce;
-      }, (error) => {
-        return error
       });
   }
 }

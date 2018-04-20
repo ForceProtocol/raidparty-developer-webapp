@@ -10,3 +10,17 @@
 .sdk-keys {
   cursor: pointer;
 }
+
+.modal-body .form-group {
+  display: flex;
+  align-items: flex-end;
+}
+
+.modal-body .form-control {
+  width: 70%;
+  margin-left: 10px;
+}
+
+.modal-body .btn-info {
+  margin-left: 10px;
+}

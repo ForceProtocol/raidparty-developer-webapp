@@ -9,7 +9,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthService } from './services/auth.service';
@@ -17,6 +17,7 @@ import { GameService } from './services/game.service';
 import { AppInterceptor } from './services/app.interceptor';
 
 import { ToastrModule } from 'ngx-toastr';
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 import { GameAddedComponent } from './game/game-added/game-added.component';
@@ -46,11 +47,13 @@ import { RewardsComponent } from './rewards/rewards.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ClipboardModule
   ],
   providers: [AuthService, GameService,
   { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }],
