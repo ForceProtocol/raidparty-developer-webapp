@@ -114,7 +114,8 @@ export class AddGameComponent implements OnInit {
   }
 
   update() {
-    this.addGameForm.value.avatar = this.fileData ? this.fileData : new File([this.game.avatar], "temp", {type: "image/jpg"});
+
+    this.addGameForm.value.avatar = this.fileData ? this.fileData : this.dataURLtoFile(this.imageUrl, 'temp.jpg');
     this.gameService.update(this.addGameForm.value, this.gameId)
       .subscribe((data) => {
         this.toaster.success("Your game updated successfully", 'Success', {
@@ -129,6 +130,17 @@ export class AddGameComponent implements OnInit {
             positionClass: "toast-top-center"
           });
         })
+  }
+
+
+  dataURLtoFile(dataurl, filename) {
+
+    let arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--){
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, {type:mime});
   }
 
   upload(fileInput) {
